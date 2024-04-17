@@ -23,14 +23,13 @@ uploaded_file = st.file_uploader("Upload your input CSV file", type=["csv"])
 
 # If a file is uploaded, process it
 if uploaded_file is not None:
-    # To read file as string:
-    stringio = uploaded_file.getvalue().decode("utf-8")
     
     # To convert to a DataFrame
     df = pd.read_csv(uploaded_file)
     
     # Display the first few rows of the dataframe
-    st.write(df.head())
+    st.write(df.head()) 
+    
 else:
     # Placeholder dataframe if no file is uploaded
     df = pd.DataFrame()
