@@ -13,7 +13,7 @@ def calculate_percentage(df):
     # Placeholder logic can be replaced with actual data processing.
     if df is not None and not df.empty:
         return 75  # Example: stubbed value
-    return 0
+    return None
 
 # Frontend
 st.title("Data Quality Dashboard")
@@ -28,6 +28,7 @@ if uploaded_file is not None:
     df = pd.read_csv(uploaded_file)
     
     # Display the first few rows of the dataframe
+    st.write('Sampled Rows From File')
     st.write(df.head()) 
     
 else:
@@ -37,12 +38,14 @@ else:
 # Display the calculated percentage
 percent_complete = calculate_percentage(df)
 # Determine color based on percentages
-if percent_complete >= 90:
-    st.header(f":green[{percent_complete}%] Of Records Quality as Complete")
-if 90 > percent_complete >= 75:
-    st.header(f":orange[{percent_complete}%] Of Records Quality as Complete")
-if 75 > percent_complete:
-    st.header(f":red[{percent_complete}%] Of Records Quality as Complete")
+if not percent_complete: st.header("No File Uploaded")
+else:
+    if percent_complete >= 90:
+        st.header(f":green[{percent_complete}%] Of Records Quality as Complete")
+    if 90 > percent_complete >= 75:
+        st.header(f":orange[{percent_complete}%] Of Records Quality as Complete")
+    if 75 > percent_complete:
+        st.header(f":red[{percent_complete}%] Of Records Quality as Complete")
 
 # Criteria Display
 st.subheader("Criteria")
